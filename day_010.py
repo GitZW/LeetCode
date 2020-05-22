@@ -34,3 +34,18 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        if head is None:
+            return head
+        val_set = set()
+        current_node = head
+        val_set.add(current_node.val)
+        while True:
+            if current_node.next is None:
+                break
+            if current_node.next.val in val_set:
+                current_node.next = current_node.next.next
+            else:
+                val_set.add(current_node.next.val)
+                current_node = current_node.next
+
+        return head
