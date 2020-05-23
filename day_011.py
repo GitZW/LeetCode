@@ -29,4 +29,14 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        list_val = []
+        while True:
+            if head is not None:
+                list_val.append(head.val)
 
+            if head.next is None:
+                break
+            else:
+                head = head.next
+
+        return list_val[-k]
