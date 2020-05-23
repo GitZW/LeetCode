@@ -40,3 +40,16 @@ class Solution(object):
                 head = head.next
 
         return list_val[-k]
+
+
+class Solution2:
+    def kthToLast(self, head, k: int) -> int:
+        fast = head
+        slow = head
+        while k > 0:
+            fast = fast.next
+            k -= 1
+        while fast != None:
+            fast = fast.next
+            slow = slow.next
+        return slow.val
