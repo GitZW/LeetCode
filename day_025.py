@@ -34,6 +34,9 @@ class TreeNode(object):
 
 
 class Solution(object):
+    """
+    就是判断中序遍历后面一个值大于前面一个值
+    """
     def __init__(self):
         self.last_visited = float("-inf")
 
