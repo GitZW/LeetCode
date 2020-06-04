@@ -26,15 +26,36 @@ Explanation: Input: [5,1,4,null,null,3,6].
 
 
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
 
 class Solution(object):
+    def __init__(self):
+        self.last_visited = float("-inf")
+
     def isValidBST(self, root):
         """
         :type root: TreeNode
         :rtype: bool
         """
+        flag = True
+        if not root:
+            return True
+
+        if root.left:
+            flag = self.isValidBST(root.left)
+        if not flag:
+            return False
+
+        if root.val < self.last_visited:
+            return False
+        self.last_visited = root.val
+
+        if root.right:
+            flag = self.isValidBST(root.right)
+
+        return flag
