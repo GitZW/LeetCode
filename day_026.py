@@ -32,16 +32,39 @@ Output: null
 
 
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
 
 class Solution(object):
+    def __init__(self):
+        self.found = False
+        self.last_node = None
+
     def inorderSuccessor(self, root, p):
         """
         :type root: TreeNode
         :type p: TreeNode
         :rtype: TreeNode
         """
+        if not root:
+            return
+        if root.right:
+            self.inorderSuccessor(root.right, p)
+        if self.found:
+            return self.last_node
+
+        if root == p:
+            self.found = True
+            return self.last_node
+        self.last_node = root
+
+        if root.left:
+            self.inorderSuccessor(root.left, p)
+        if self.found:
+            return self.last_node
+
+        return self.last_node
