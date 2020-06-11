@@ -28,6 +28,12 @@
 
 
 class Solution(object):
+    """
+    m 二位数组表示路径 ans[row-1][col-1]
+    其中1表示可以到达，0表示不能到达
+    ans[i][j] = max(ans[i-1][j],ans[i][j-1])
+    """
+
     def pathWithObstacles(self, obstacleGrid):
         """
         :type obstacleGrid: List[List[int]]
@@ -35,27 +41,65 @@ class Solution(object):
         """
         row = len(obstacleGrid)
         col = len(obstacleGrid[0])
+        if not obstacleGrid:
+            return []
 
+        ans = [[0] * col for _ in range(row)]
+        # 检查是否可到达
+        if obstacleGrid[0][0] == 1 or obstacleGrid[row - 1][col - 1] == 1:
+            return []
 
-class Solution:
-    def pathWithObstacles(self, obstacleGrid):
-        ans, r, c = [], len(obstacleGrid), len(obstacleGrid[0])
-        if obstacleGrid[-1][-1] != 0:
-            return ans
-        obstacleGrid[-1][-1] = 2
-        for i in reversed(range(r)):
-            for j in reversed(range(c)):
-                if obstacleGrid[i][j] > 1:
-                    if i > 0 and not obstacleGrid[i - 1][j]:
-                        obstacleGrid[i - 1][j] = 2
-                    if j > 0 and not obstacleGrid[i][j - 1]:
-                        obstacleGrid[i][j - 1] = 3
-        if obstacleGrid[0][0] > 1:
-            i, j = 0, 0
-            while i < r and j < c:
-                ans.append([i, j])
-                if obstacleGrid[i][j] == 2:
-                    i += 1
+        ans[0][0] = 1
+
+        # 初始话ans 的第一行和第一列,避免求ans的时候数组越界
+        for i in range(1, row):
+            if obstacleGrid[i][0] == 0:
+                ans[i][0] = ans[i - 1][0]
+            else:
+                ans[i][0] = 1
+
+        for i in range(1, col):
+            if obstacleGrid[0][i] == 0:
+                ans[0][i] = ans[0][i - 1]
+            else:
+                ans[0][i] = 1
+
+        # 求ans
+        for i in range(row):
+            for j in range(col):
+                if obstacleGrid[i][j] == 1:
+                    ans[i][j] = 0
                 else:
-                    j += 1
-        return ans
+                    ans[i][j] = max(ans[i - 1][j], ans[i][j - 1])
+
+        # 最后一个点不能到达
+        if ans[-1][-1] == 0:
+            return []
+
+        result = []
+        row_index = row - 1
+        col_index = col - 1
+        result.insert(0, [row_index, col_index])
+
+        # 求路径
+        while row_index > 0 or col_index > 0:
+            c = col_index - 1
+
+            if c >= 0 and ans[row_index][c] == 1:
+                result.insert(0, [row_index, c])
+                col_index = c
+            else:
+                row_index -= 1
+                result.insert(0, [row_index, col_index])
+
+        return result
+
+
+test = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
+]
+
+s = Solution()
+print(s.pathWithObstacles(test))
