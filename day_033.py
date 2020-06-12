@@ -37,7 +37,7 @@ class Solution(object):
         def _subsets(num, cur_l):
             copy = cur_l[:]
             for c in copy:
-                cur_l.append(c[:]+[num])
+                cur_l.append(c+[num])
 
             return cur_l
 
@@ -47,7 +47,7 @@ class Solution(object):
         return cur_list
 
 
-test = [1,2]
+test = [1,2,3]
 s = Solution()
 print(s.subsets(test))
 
