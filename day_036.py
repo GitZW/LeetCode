@@ -37,6 +37,6 @@ class Solution(object):
 
 
 s = Solution()
-w = [2, 2]
-p = [3, 4]
-print(s.max_price(w, p, 9))
+w = [2, 2, 3]
+p = [3, 4, 5]
+print(s.max_price(w, p, 3))
