@@ -42,4 +42,29 @@ class Solution(object):
         :type newColor: int
         :rtype: List[List[int]]
         """
+        if not image:
+            return
+
+        old_color = image[sr][sc]
+        self._fill(image, sr, sc, newColor, old_color)
+        return image
+
+    def _fill(self, image, sr, sc, new_color, old_color):
+        ir = len(image)
+        ic = len(image[0])
+        if sr < 0 or sc < 0 or sr >= ir or sc >= ic:
+            return
+        if image[sr][sc] == new_color:
+            return
+
+        if image[sr][sc] != old_color:
+            return
+        image[sr][sc] = new_color
+
+        self._fill(image, sr, sc - 1, new_color, old_color)
+        self._fill(image, sr - 1, sc, new_color, old_color)
+        self._fill(image, sr + 1, sc, new_color, old_color)
+        self._fill(image, sr, sc + 1, new_color, old_color)
+
+        return image
 # leetcode submit region end(Prohibit modification and deletion)
