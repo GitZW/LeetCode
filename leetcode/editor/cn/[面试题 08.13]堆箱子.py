@@ -24,6 +24,9 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
+import functools
+
+
 class Solution(object):
     def pileBox(self, box):
         """
@@ -47,8 +50,20 @@ class Solution(object):
         return max(h)
 
 
+class Solution2(object):
+    def pileBox(self, box):
+        @functools.lru_cache(maxsize=3000)
+        def sol(w, d, h):
+            inners = [(iw, id, ih) for iw, id, ih in box if iw < w and id < d and ih < h]
+            if not inners:
+                return h
+            return max((sol(*i) for i in inners)) + h
+
+        return max((sol(*i) for i in box))
+
+
 box = [[1, 1, 1], [2, 3, 4], [2, 6, 7], [3, 4, 5]]
 box.sort(reverse=True, key=lambda i: (i[0], -i[1]))
 
-s = Solution()
+s = Solution2()
 print(s.pileBox([[1, 1, 1], [2, 3, 4], [2, 6, 7], [3, 4, 5]]))
