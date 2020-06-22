@@ -47,13 +47,12 @@ class Solution(object):
                 False: [(True, True), (False, False)]
             }
         }
-        self.cache = {}
 
         return self._countEval(s, result)
 
+    import functools
+    @functools.lru_cache(None)
     def _countEval(self, s, result):
-        if (s, result) in self.cache:
-            return self.cache[(s, result)]
 
         if len(s) == 1:
             val = int(s)
@@ -65,7 +64,6 @@ class Solution(object):
                 for bool_r, bool_l in self.ops[s[i]][result]:
                     total += self._countEval(s[:i], bool_r) * self._countEval(s[i + 1:], bool_l)
 
-        self.cache[(s, result)] = total
         return total
 
 
