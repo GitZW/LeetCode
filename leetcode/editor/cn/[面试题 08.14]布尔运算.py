@@ -33,4 +33,43 @@ class Solution(object):
         :type result: int
         :rtype: int
         """
-# leetcode submit region end(Prohibit modification and deletion)
+        self.ops = {
+            '&': {
+                True: [(True, True)],
+                False: [(True, False), (False, True), (False, False)]
+            },
+            '|': {
+                True: [(True, False), (False, True), (True, True)],
+                False: [(False, False)]
+            },
+            '^': {
+                True: [(True, False), (False, True)],
+                False: [(True, True), (False, False)]
+            }
+        }
+        self.cache = {}
+
+        return self._countEval(s, result)
+
+    def _countEval(self, s, result):
+        if (s, result) in self.cache:
+            return self.cache[(s, result)]
+
+        if len(s) == 1:
+            val = int(s)
+            return int(bool(val) == result)
+
+        total = 0
+        for i in range(len(s)):
+            if s[i] in self.ops:
+                for bool_r, bool_l in self.ops[s[i]][result]:
+                    total += self._countEval(s[:i], bool_r) * self._countEval(s[i + 1:], bool_l)
+
+        self.cache[(s, result)] = total
+        return total
+
+
+e = "1^0|0|1"
+result = 0
+s = Solution()
+print(s.countEval(e, result))
