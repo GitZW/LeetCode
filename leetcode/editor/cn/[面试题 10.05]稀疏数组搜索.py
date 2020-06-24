@@ -31,4 +31,8 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
+        try:
+            return words.index(s)
+        except:
+            return -1
 # leetcode submit region end(Prohibit modification and deletion)
