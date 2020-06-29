@@ -48,6 +48,8 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        if not root:
+            return []
         ans = []
         queue = []
         queue.append((root, 0))
@@ -64,4 +66,29 @@ class Solution(object):
             ans[depth].append(c_node.val)
         return ans
 
-# leetcode submit region end(Prohibit modification and deletion)
+
+class Solution2(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if not root:
+            return []
+        ans = []
+        queue = []
+        queue.append(root)
+        while queue:
+            tmp = []
+            for _ in range(len(queue)):
+                c_node = queue.pop()
+                tmp.append(c_node.val)
+
+                if c_node.left:
+                    queue.insert(0, c_node.left)
+                if c_node.right:
+                    queue.insert(0, c_node.right)
+
+            ans.append(tmp)
+
+        return ans
