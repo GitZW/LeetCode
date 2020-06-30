@@ -40,7 +40,7 @@ class Solution(object):
         import collections
         graph = collections.defaultdict(list)
         for u, v, w in times:
-            graph[u].append([v, w])
+            graph[u].append((w, v))
 
         node_time = {i: float("inf") for i in range(1, N + 1)}
 
@@ -48,7 +48,9 @@ class Solution(object):
             if t >= node_time[n]:
                 return
             node_time[n] = t
-            for v, w in graph[n]:
+
+            # 优化路径短的先计算
+            for w, v in sorted(graph[n]):
                 dfs(v, t + w)
 
         dfs(K, 0)
