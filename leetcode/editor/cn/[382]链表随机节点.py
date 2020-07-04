@@ -26,6 +26,8 @@
 #         self.next = None
 
 import random
+
+
 class Solution(object):
 
     def __init__(self, head):
@@ -46,6 +48,39 @@ class Solution(object):
         """
         return random.choice(self.value_list)
 
+
+class Solution2(object):
+    """
+    蓄水池算法
+    """
+
+    def __init__(self, head):
+        """
+        @param head The linked list's head.
+        Note that the head is guaranteed to be not null, so it contains at least one node.
+        :type head: ListNode
+        """
+        self.head = head
+
+    def getRandom(self,m=1):
+        """
+        Returns a random node's value.
+        :param m 随机选出M个
+        :rtype: int
+        """
+        if not self.head:
+            return
+        count = 0
+        cur = self.head
+        ans = None
+        while cur:
+            count += 1
+            if count == random.randint(1, count):
+                ans = cur.val
+
+            cur = cur.next
+
+        return ans
 
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(head)
