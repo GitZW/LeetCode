@@ -87,4 +87,4 @@ class Solution2(object):
 
 
 s = Solution2()
-print(s.waysToChange(5))
+print(s.waysToChange(25))
