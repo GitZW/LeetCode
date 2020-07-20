@@ -27,7 +27,7 @@ class Trie(object):
         """
         Initialize your data structure here.
         """
-
+        self.trie = dict()
 
     def insert(self, word):
         """
@@ -35,7 +35,14 @@ class Trie(object):
         :type word: str
         :rtype: None
         """
-
+        trie = self.trie
+        for i in word:
+            if i in trie:
+                trie = trie[i]
+            else:
+                trie[i] = dict()
+                trie = trie[i]
+        trie["is_end"] = True
 
     def search(self, word):
         """
@@ -43,7 +50,15 @@ class Trie(object):
         :type word: str
         :rtype: bool
         """
-
+        trie = self.trie
+        for i in word:
+            if i not in trie:
+                return False
+            else:
+                trie = trie[i]
+        if trie.get("is_end"):
+            return True
+        return False
 
     def startsWith(self, prefix):
         """
@@ -51,12 +66,18 @@ class Trie(object):
         :type prefix: str
         :rtype: bool
         """
-
-
+        trie = self.trie
+        for i in prefix:
+            if i not in trie:
+                return False
+            else:
+                trie = trie[i]
+        return True
 
 # Your Trie object will be instantiated and called as such:
-# obj = Trie()
-# obj.insert(word)
-# param_2 = obj.search(word)
-# param_3 = obj.startsWith(prefix)
-# leetcode submit region end(Prohibit modification and deletion)
+obj = Trie()
+obj.insert("word")
+print(obj.trie)
+
+param_2 = obj.search("word")
+param_3 = obj.startsWith("wo")
