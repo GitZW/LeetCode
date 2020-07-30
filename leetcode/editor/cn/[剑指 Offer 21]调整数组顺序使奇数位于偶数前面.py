@@ -26,6 +26,6 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        nums.sort(reverse=True, key=lambda x: x % 2)
-        return nums
+
+        return sorted(nums,reverse=True,key=lambda x: x % 2)
 
