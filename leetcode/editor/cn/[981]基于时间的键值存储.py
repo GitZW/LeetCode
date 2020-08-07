@@ -57,13 +57,17 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
+import bisect
+import collections
+
+
 class TimeMap(object):
 
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        
+        self.time_map = collections.defaultdict(list)
 
     def set(self, key, value, timestamp):
         """
@@ -72,7 +76,7 @@ class TimeMap(object):
         :type timestamp: int
         :rtype: None
         """
-        
+        self.time_map[key].append((timestamp, value))
 
     def get(self, key, timestamp):
         """
@@ -80,8 +84,11 @@ class TimeMap(object):
         :type timestamp: int
         :rtype: str
         """
-        
-
+        r = self.time_map.get(key, None)
+        if not r:
+            return ""
+        i = bisect.bisect(r, (timestamp, chr(127)))
+        return r[i - 1][1] if i else ""
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
