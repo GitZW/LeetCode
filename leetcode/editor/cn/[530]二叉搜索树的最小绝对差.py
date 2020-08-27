@@ -45,4 +45,16 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-# leetcode submit region end(Prohibit modification and deletion)
+        res, prev = float("inf"), float("-inf")
+
+        def dfs(root):
+            nonlocal res, prev
+            if not root:
+                return
+            dfs(root.left)
+            res = min(res, root.val - prev)
+            prev = root.val
+            dfs(root.right)
+
+        dfs(root)
+        return res
