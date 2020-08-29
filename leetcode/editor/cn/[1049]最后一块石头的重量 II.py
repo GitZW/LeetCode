@@ -34,11 +34,15 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
-class Solution(object):
+class Solution:
     def lastStoneWeightII(self, stones):
-        """
-        :type stones: List[int]
-        :rtype: int
-        """
-        
+        sum_weight = sum(stones)
+        max_weight = sum_weight // 2
+        f = [0 for _ in range(max_weight + 1)]
+        for stone in stones:
+            for v in range(max_weight, stone - 1, -1):
+                f[v] = max(f[v], f[v - stone] + stone)
+        return sum_weight - 2 * f[-1]
+
+
 # leetcode submit region end(Prohibit modification and deletion)
