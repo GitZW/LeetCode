@@ -31,4 +31,16 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-# leetcode submit region end(Prohibit modification and deletion)
+        first_pointer = last_pointer = head
+        for i in range(n):
+            first_pointer = first_pointer.next
+        if not first_pointer:
+            return last_pointer.next
+
+        while first_pointer.next:
+            first_pointer = first_pointer.next
+            last_pointer = last_pointer.next
+        last_pointer.next = last_pointer.next.next
+
+        return head
+
