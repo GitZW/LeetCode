@@ -35,6 +35,7 @@ class Solution(object):
         for i in range(n):
             first_pointer = first_pointer.next
         if not first_pointer:
+            # 删除第一个节点
             return last_pointer.next
 
         while first_pointer.next:
