@@ -43,4 +43,10 @@ class Solution:
                 dct[i] = i
                 res += i + 1
         return res
-# leetcode submit region end(Prohibit modification and deletion)
+
+
+
+class Solution2:
+    def numRabbits(self, answers):
+        count = Counter(answers)
+        pass
