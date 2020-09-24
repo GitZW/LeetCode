@@ -62,32 +62,31 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
+from collections import defaultdict
+
+
 class TweetCounts(object):
+    class TweetCounts:
 
-    def __init__(self):
+        def __init__(self):
+            self.user = defaultdict(list)
+
+        def recordTweet(self, tweetName: str, time: int) -> None:
+            self.user[tweetName].append(time)
+
+        def getTweetCountsPerFrequency(self, freq: str, tweetName: str, startTime: int, endTime: int) -> List[int]:
+            endTime += 1
+            if freq == 'minute':
+                length = 60
+            elif freq == 'hour':
+                length = 60 * 60
+            else:
+                length = 60 * 60 * 24
+            ans = [0] * ((endTime - startTime - 1) // length + 1)
+            for t in self.user[tweetName]:
+                if endTime > t >= startTime:
+                    ans[(t - startTime) // length] += 1
+            return ans
 
 
-    def recordTweet(self, tweetName, time):
-        """
-        :type tweetName: str
-        :type time: int
-        :rtype: None
-        """
 
-
-    def getTweetCountsPerFrequency(self, freq, tweetName, startTime, endTime):
-        """
-        :type freq: str
-        :type tweetName: str
-        :type startTime: int
-        :type endTime: int
-        :rtype: List[int]
-        """
-
-
-
-# Your TweetCounts object will be instantiated and called as such:
-# obj = TweetCounts()
-# obj.recordTweet(tweetName,time)
-# param_2 = obj.getTweetCountsPerFrequency(freq,tweetName,startTime,endTime)
-# leetcode submit region end(Prohibit modification and deletion)
