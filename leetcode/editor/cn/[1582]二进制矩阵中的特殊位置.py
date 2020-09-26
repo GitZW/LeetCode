@@ -56,10 +56,13 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
-class Solution(object):
+class Solution:
     def numSpecial(self, mat):
-        """
-        :type mat: List[List[int]]
-        :rtype: int
-        """
-# leetcode submit region end(Prohibit modification and deletion)
+        cols = list(zip(*mat))
+        res = 0
+        for rows in mat:
+            if sum(rows) == 1:
+                j = rows.index(1)
+                if sum(cols[j]) == 1:
+                    res += 1
+        return res
