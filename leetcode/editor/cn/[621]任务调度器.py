@@ -26,11 +26,18 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
-class Solution(object):
+import collections
+
+
+class Solution:
     def leastInterval(self, tasks, n):
-        """
-        :type tasks: List[str]
-        :type n: int
-        :rtype: int
-        """
-# leetcode submit region end(Prohibit modification and deletion)
+        counter = collections.Counter(tasks)
+
+        task_max = max(counter.values())
+        residual = 0
+        for key in counter.keys():
+            if counter[key] == task_max:
+                residual += 1
+        res = (task_max - 1) * (n + 1) + residual
+
+        return res if res >= len(tasks) else len(tasks)
