@@ -54,13 +54,23 @@
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
-    def btreeGameWinningMove(self, root, n, x):
-        """
-        :type root: TreeNode
-        :type n: int
-        :type x: int
-        :rtype: bool
-        """
+class Solution:
+    def btreeGameWinningMove(self, root: TreeNode, n: int, x: int) -> bool:
+        self.red_left, self.red_right = 0, 0
+
+        def dfs(root):
+            if not root:
+                return 0
+            left = dfs(root.left)
+            right = dfs(root.right)
+            if root.val == x:
+                self.red_left = left
+                self.red_right = right
+            return left + right + 1
+
+        dfs(root)
+        parent = n - self.red_left - self.red_right - 1
+        judge = [parent, self.red_left, self.red_right]
+        return any([j > n // 2 for j in judge])
         
 # leetcode submit region end(Prohibit modification and deletion)
