@@ -39,5 +39,17 @@ class Solution(object):
         :type heaters: List[int]
         :rtype: int
         """
+        res = []
+        heaters = [float('-inf')] + sorted(heaters) + [float('inf')]
+        for c in houses:
+            left, right = 0, len(heaters) - 1
+            while left < right:
+                mid = left + (right - left) // 2
+                if heaters[mid] < c:
+                    left = mid + 1
+                else:
+                    right = mid
+            res.append(min(heaters[left] - c, c - heaters[left - 1]))
+        return max(res)
         
 # leetcode submit region end(Prohibit modification and deletion)
