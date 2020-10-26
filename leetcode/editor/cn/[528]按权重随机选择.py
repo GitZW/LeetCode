@@ -60,17 +60,20 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
+import bisect
+import random
+
+
 class Solution(object):
-    import random
-    from bisect import bisect
-    def __init__(self, w: List[int]):
+    def __init__(self, w):
         self.sum_ = []
         temp = 0
         for i in w:
             temp += i
             self.sum_.append(temp)
-    def pickIndex(self) -> int:
-        randnum = random.randint(1,self.sum_[-1])
+
+    def pickIndex(self):
+        randnum = random.randint(1, self.sum_[-1])
         return bisect.bisect_left(self.sum_, randnum)
 
 # Your Solution object will be instantiated and called as such:
