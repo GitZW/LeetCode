@@ -33,5 +33,6 @@ class Solution(object):
         :type A: List[int]
         :rtype: List[int]
         """
-        
+        return sorted(num * num for num in A)
+
 # leetcode submit region end(Prohibit modification and deletion)
