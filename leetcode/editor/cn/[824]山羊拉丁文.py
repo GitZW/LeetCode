@@ -57,4 +57,3 @@ class Solution(object):
         return " ".join(convert(word) + 'a' * i
                         for i, word in enumerate(S.split(), 1))
 
- 
