@@ -35,4 +35,7 @@ class Solution(object):
         :type m: int
         :rtype: int
         """
-# leetcode submit region end(Prohibit modification and deletion)
+        f = 0
+        for i in range(2, n + 1):
+            f = (m + f) % i
+        return f
