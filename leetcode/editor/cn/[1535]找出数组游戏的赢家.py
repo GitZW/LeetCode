@@ -58,4 +58,40 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-# leetcode submit region end(Prohibit modification and deletion)
+        return self._get_winner(arr, k, k)
+
+    def _get_winner(self, cur_arr, cur_k, k):
+        if cur_k == 0:
+            return cur_arr[0]
+        if cur_arr[0] > cur_arr[1]:
+            cur_arr.append(cur_arr.pop(1))
+            return self._get_winner(cur_arr, cur_k - 1, k)
+        else:
+            cur_arr.append(cur_arr.pop(0))
+            return self._get_winner(cur_arr, k - 1, k)
+
+
+class Solution2(object):
+    def getWinner(self, arr, k):
+        """
+        :type arr: List[int]
+        :type k: int
+        :rtype: int
+        """
+        cur_k =max_k =len(arr) if k >len(arr) else k
+        cur_arr = arr
+        while cur_k > 0:
+            if cur_arr[0] > cur_arr[1]:
+                cur_arr.append(cur_arr.pop(1))
+                cur_k -= 1
+            else:
+                cur_k =max_k  - 1
+                cur_arr.append(cur_arr.pop(0))
+
+        return cur_arr[0]
+
+
+s = Solution2()
+arr = [1, 9, 8, 2, 3, 7, 6, 4, 5]
+k = 7
+print(s.getWinner(arr, k))
