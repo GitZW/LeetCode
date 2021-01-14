@@ -42,10 +42,12 @@
 
 # leetcode submit region begin(Prohibit modification and deletion)
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 class Solution(object):
     def addTwoNumbers(self, l1, l2):
         """
@@ -53,4 +55,26 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
+        res = cur = ListNode(-1)
+        full_flag = 0
+        while l1 or l2 or full_flag:
+            if l1:
+                l1_val = l1.val
+                l1 = l1.next
+            else:
+                l1_val = 0
+
+            if l2:
+                l2_val = l2.val
+                l2 = l2.next
+            else:
+                l2_val = 0
+
+            num = l1_val + l2_val + full_flag
+            full_flag = num // 10
+            cur.next = ListNode(num % 10)
+            cur = cur.next
+
+        return res.next
+
 # leetcode submit region end(Prohibit modification and deletion)
