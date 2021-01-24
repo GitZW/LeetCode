@@ -1,5 +1,5 @@
 import grpc
-from leetcode.editor.cn.proto_test import test_pb2, test_pb2_grpc
+from leetcode.editor.cn.grpc_test.hello import test_pb2, test_pb2_grpc
 
 
 def run():

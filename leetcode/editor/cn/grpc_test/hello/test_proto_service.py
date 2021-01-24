@@ -3,12 +3,18 @@ from concurrent import futures
 
 import grpc
 
-from leetcode.editor.cn.proto_test import test_pb2, test_pb2_grpc
+from leetcode.editor.cn.grpc_test.hello import test_pb2, test_pb2_grpc
 
 
 class Greeter(test_pb2_grpc.GreeterServicer):
     # 实现 proto 文件中定义的 rpc 调用
     def SayHello(self, request, context):
+        print(type(request))
+        print(request)
+
+        print(type(context))
+        print(context)
+
         return test_pb2.HelloReply(message='hello {msg}'.format(msg="pong"))
 
     def SayHelloAgain(self, request, context):
@@ -31,3 +37,9 @@ def serve():
 if __name__ == '__main__':
     # https://github.com/grpc/grpc/tree/master/examples/python/helloworld
     serve()
+
+
+# from django.core.wsgi import get_wsgi_application
+# from grpcWSGI.server import grpcWSGI
+# application=get_wsgi_application()
+# application=grpcWSGI(application)
