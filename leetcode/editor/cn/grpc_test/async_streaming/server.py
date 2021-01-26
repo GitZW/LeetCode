@@ -50,8 +50,8 @@ class Phone(phone_pb2_grpc.PhoneServicer):
         logging.info("Call session cleaned [%s]", MessageToJson(call_info))
 
     def StreamCall(
-        self, request_iterator: Iterable[phone_pb2.StreamCallRequest],
-        context: grpc.ServicerContext
+            self, request_iterator: Iterable[phone_pb2.StreamCallRequest],
+            context: grpc.ServicerContext
     ) -> Iterable[phone_pb2.StreamCallResponse]:
         try:
             request = next(request_iterator)
@@ -84,6 +84,9 @@ def serve(address: str) -> None:
     server.start()
     logging.info("Server serving at %s", address)
     server.wait_for_termination()
+    # wait_for_termination
+    # Block current thread until the server stops.
+    # This is an EXPERIMENTAL(实验性的) API.
 
 
 if __name__ == "__main__":
