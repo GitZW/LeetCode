@@ -25,8 +25,8 @@ import threading
 import grpc
 import search
 
-from examples.python.cancellation import hash_name_pb2
-from examples.python.cancellation import hash_name_pb2_grpc
+import hash_name_pb2
+import hash_name_pb2_grpc
 
 _LOGGER = logging.getLogger(__name__)
 _SERVER_HOST = 'localhost'

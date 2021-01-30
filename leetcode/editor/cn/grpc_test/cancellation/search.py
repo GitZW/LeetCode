@@ -23,7 +23,7 @@ import itertools
 import logging
 import struct
 
-from examples.python.cancellation import hash_name_pb2
+import hash_name_pb2
 
 _LOGGER = logging.getLogger(__name__)
 _BYTE_MAX = 255

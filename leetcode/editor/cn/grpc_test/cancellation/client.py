@@ -24,8 +24,8 @@ import sys
 
 import grpc
 
-from examples.python.cancellation import hash_name_pb2
-from examples.python.cancellation import hash_name_pb2_grpc
+import hash_name_pb2
+import hash_name_pb2_grpc
 
 _DESCRIPTION = "A client for finding hashes similar to names."
 _LOGGER = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ def run_unary_client(server_target, name, ideal_distance):
         stub = hash_name_pb2_grpc.HashFinderStub(channel)
         future = stub.Find.future(hash_name_pb2.HashNameRequest(
             desired_name=name, ideal_hamming_distance=ideal_distance),
-                                  wait_for_ready=True)
+            wait_for_ready=True)
 
         def cancel_request(unused_signum, unused_frame):
             future.cancel()
@@ -55,7 +55,7 @@ def run_streaming_client(server_target, name, ideal_distance,
             desired_name=name,
             ideal_hamming_distance=ideal_distance,
             interesting_hamming_distance=interesting_distance),
-                                          wait_for_ready=True)
+            wait_for_ready=True)
 
         def cancel_request(unused_signum, unused_frame):
             result_generator.cancel()
@@ -68,7 +68,7 @@ def run_streaming_client(server_target, name, ideal_distance,
 
 def main():
     parser = argparse.ArgumentParser(description=_DESCRIPTION)
-    parser.add_argument("name", type=str, help='The desired name.')
+    parser.add_argument("name", default="abc", type=str, help='The desired name.')
     parser.add_argument("--ideal-distance",
                         default=0,
                         nargs='?',
