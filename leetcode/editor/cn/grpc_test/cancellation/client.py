@@ -68,7 +68,7 @@ def run_streaming_client(server_target, name, ideal_distance,
 
 def main():
     parser = argparse.ArgumentParser(description=_DESCRIPTION)
-    parser.add_argument("name", default="abc", type=str, help='The desired name.')
+    parser.add_argument("name", default="asdasfsdfsfsfsfdfs", type=str, nargs="?", help='The desired name.')
     parser.add_argument("--ideal-distance",
                         default=0,
                         nargs='?',
@@ -89,6 +89,7 @@ def main():
 
     args = parser.parse_args()
     if args.show_inferior is not None:
+        print(args)
         run_streaming_client(args.server, args.name, args.ideal_distance,
                              args.show_inferior)
     else:

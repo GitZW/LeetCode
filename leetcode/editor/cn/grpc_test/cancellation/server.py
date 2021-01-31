@@ -45,6 +45,7 @@ class HashFinder(hash_name_pb2_grpc.HashFinderServicer):
 
         def on_rpc_done():
             _LOGGER.debug("Attempting to regain servicer thread.")
+            # 将标志设为True，并通知所有处于等待阻塞状态的线程恢复运行状态。并通知所有处于等待阻塞状态的线程恢复运行状态
             stop_event.set()
 
         context.add_callback(on_rpc_done)

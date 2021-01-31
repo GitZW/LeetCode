@@ -79,6 +79,11 @@ def _bytestrings_of_length(length):
     Yields:
       All bytestrings of length `length`.
     """
+    # itertools.product 可迭代对象输入的笛卡儿积。
+    # product('ABCD', 'xy') --> Ax Ay Bx By Cx Cy Dx Dy
+    # product(range(2), repeat=3) --> 000 001 010 011 100 101 110 111
+
+
     for digits in itertools.product(range(_BYTE_MAX), repeat=length):
         yield b''.join(struct.pack('B', i) for i in digits)
 
@@ -91,6 +96,8 @@ def _all_bytestrings():
     Yields:
       All bytestrings in ascending order of length.
     """
+    # chain.from_iterable(['ABC', 'DEF']) --> A B C D E F
+
     for bytestring in itertools.chain.from_iterable(
             _bytestrings_of_length(length) for length in itertools.count()):
         yield bytestring
