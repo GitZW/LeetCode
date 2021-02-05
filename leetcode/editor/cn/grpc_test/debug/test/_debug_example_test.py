@@ -17,12 +17,12 @@ import asyncio
 import logging
 import unittest
 
-from examples.python.debug import debug_server
-from examples.python.debug import asyncio_debug_server
-from examples.python.debug import send_message
-from examples.python.debug import asyncio_send_message
-from examples.python.debug import get_stats
-from examples.python.debug import asyncio_get_stats
+import debug_server
+import asyncio_debug_server
+import send_message
+import asyncio_send_message
+import get_stats
+import asyncio_get_stats
 
 _LOGGER = logging.getLogger(__name__)
 _LOGGER.setLevel(logging.INFO)
