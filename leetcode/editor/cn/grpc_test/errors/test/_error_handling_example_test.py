@@ -26,9 +26,9 @@ import logging
 
 import grpc
 
-from examples.protos import helloworld_pb2_grpc
-from examples.python.errors import client as error_handling_client
-from examples.python.errors import server as error_handling_server
+import helloworld_pb2_grpc
+import client as error_handling_client
+import server as error_handling_server
 
 
 class ErrorHandlingExampleTest(unittest.TestCase):
