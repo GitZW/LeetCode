@@ -47,4 +47,6 @@ class Solution(object):
         :type arr: List[int]
         :rtype: List[int]
         """
-# leetcode submit region end(Prohibit modification and deletion)
+        # 如果存在这种分法，那么最终每一部分1的数量一定是相等的。
+
+        # leetcode submit region end(Prohibit modification and deletion)
